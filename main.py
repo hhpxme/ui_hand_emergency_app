@@ -51,22 +51,22 @@ class MainLayout(GridLayout):
         # horizontal navigation layout
         self.nav_btn_user = Button(text='User', size_hint=(None, None), width=75, height=75)
         self.nav_btn_video = Button(text='Video', size_hint=(None, None), width=75, height=75)
-        self.nav_btn_email = Button(text='Email', size_hint=(None, None), width=75, height=75)
-        self.nav_btn_sms = Button(text='SMS', size_hint=(None, None), width=75, height=75)
+        # self.nav_btn_email = Button(text='Email', size_hint=(None, None), width=75, height=75)
+        # self.nav_btn_sms = Button(text='SMS', size_hint=(None, None), width=75, height=75)
 
         self.nav_btn_user.bind(on_press=self.nav_btn_user_on_press)
         self.nav_btn_video.bind(on_press=self.nav_btn_video_on_press)
-        self.nav_btn_email.bind(on_press=self.nav_btn_email_on_press)
-        self.nav_btn_sms.bind(on_press=self.nav_btn_sms_on_press)
+        # self.nav_btn_email.bind(on_press=self.nav_btn_email_on_press)
+        # self.nav_btn_sms.bind(on_press=self.nav_btn_sms_on_press)
 
         if not self.log:
-            self.nav_btn_sms.set_disabled(True)
-            self.nav_btn_email.set_disabled(True)
+            # self.nav_btn_sms.set_disabled(True)
+            # self.nav_btn_email.set_disabled(True)
             self.nav_btn_video.set_disabled(True)
         else:
             self.nav_btn_sms.set_disabled(False)
-            self.nav_btn_email.set_disabled(False)
-            self.nav_btn_video.set_disabled(False)
+            # self.nav_btn_email.set_disabled(False)
+            # self.nav_btn_video.set_disabled(False)
 
         # video_filter_layout
         self.filter_button_none = Button(text='x', size_hint=(None, None), width=50, height=50)
@@ -74,7 +74,7 @@ class MainLayout(GridLayout):
         self.filter_button_time = Button(text='Search by Date', size_hint=(None, None), width=150, height=50)
 
         # video_list_scrollview
-        self.cat = [[0, 'user'], [1, 'video'], [2, 'email'], [3, 'sms']]
+        self.cat = [[0, 'user'], [1, 'video']]
         self.current_state = self.cat[0][0]
         self.link = os.path.abspath(self.cat[1][1])
         self.video_list_layout = self.scrollview_layout(cat_path=self.cat[1][1])
@@ -86,8 +86,8 @@ class MainLayout(GridLayout):
         # horizontal navigation layout
         self.h_nav_layout.add_widget(self.nav_btn_user)
         self.h_nav_layout.add_widget(self.nav_btn_video)
-        self.h_nav_layout.add_widget(self.nav_btn_email)
-        self.h_nav_layout.add_widget(self.nav_btn_sms)
+        # self.h_nav_layout.add_widget(self.nav_btn_email)
+        # self.h_nav_layout.add_widget(self.nav_btn_sms)
 
         # video_filter_layout
         self.video_filter_layout.add_widget(self.filter_button_none)
@@ -159,45 +159,45 @@ class MainLayout(GridLayout):
         self.current_state = self.cat[1][0]
         self.link = os.path.abspath(self.cat[1][1])
 
-    def nav_btn_email_on_press(self, instance):
-        # replace title
-        self.title_label = str(self.nav_btn_email.text)
-        self.title_layout.remove_widget(self.title)
-        self.title = Label(text=self.title_label, font_size=32, color=self.title_color, font_name=self.title_font)
-        self.title_layout.add_widget(self.title)
+    # def nav_btn_email_on_press(self, instance):
+    #     # replace title
+    #     self.title_label = str(self.nav_btn_email.text)
+    #     self.title_layout.remove_widget(self.title)
+    #     self.title = Label(text=self.title_label, font_size=32, color=self.title_color, font_name=self.title_font)
+    #     self.title_layout.add_widget(self.title)
+    #
+    #     # replace scroll view
+    #     self.video_list_view.remove_widget(self.video_list_layout)
+    #     self.video_list_layout = self.scrollview_layout(cat_path=self.cat[2][1])
+    #     self.video_list_view.add_widget(self.video_list_layout)
+    #
+    #     if self.current_state == self.cat[0][0]:
+    #         self.video_container_layout.remove_widget(self.user_layout)
+    #         self.video_container_layout.add_widget(self.video_filter_layout)
+    #         self.video_container_layout.add_widget(self.video_list_view)
+    #
+    #     self.current_state = self.cat[2][0]
+    #     self.link = os.path.abspath(self.cat[2][1])
 
-        # replace scroll view
-        self.video_list_view.remove_widget(self.video_list_layout)
-        self.video_list_layout = self.scrollview_layout(cat_path=self.cat[2][1])
-        self.video_list_view.add_widget(self.video_list_layout)
-
-        if self.current_state == self.cat[0][0]:
-            self.video_container_layout.remove_widget(self.user_layout)
-            self.video_container_layout.add_widget(self.video_filter_layout)
-            self.video_container_layout.add_widget(self.video_list_view)
-
-        self.current_state = self.cat[2][0]
-        self.link = os.path.abspath(self.cat[2][1])
-
-    def nav_btn_sms_on_press(self, instance):
-        # replace title
-        self.title_label = str(self.nav_btn_sms.text)
-        self.title_layout.remove_widget(self.title)
-        self.title = Label(text=self.title_label, font_size=32, color=self.title_color, font_name=self.title_font)
-        self.title_layout.add_widget(self.title)
-
-        # replace scroll view
-        self.video_list_view.remove_widget(self.video_list_layout)
-        self.video_list_layout = self.scrollview_layout(cat_path=self.cat[3][1])
-        self.video_list_view.add_widget(self.video_list_layout)
-
-        if self.current_state == self.cat[0][0]:
-            self.video_container_layout.remove_widget(self.user_layout)
-            self.video_container_layout.add_widget(self.video_filter_layout)
-            self.video_container_layout.add_widget(self.video_list_view)
-
-        self.current_state = self.cat[3][0]
-        self.link = os.path.abspath(self.cat[3][1])
+    # def nav_btn_sms_on_press(self, instance):
+    #     # replace title
+    #     self.title_label = str(self.nav_btn_sms.text)
+    #     self.title_layout.remove_widget(self.title)
+    #     self.title = Label(text=self.title_label, font_size=32, color=self.title_color, font_name=self.title_font)
+    #     self.title_layout.add_widget(self.title)
+    #
+    #     # replace scroll view
+    #     self.video_list_view.remove_widget(self.video_list_layout)
+    #     self.video_list_layout = self.scrollview_layout(cat_path=self.cat[3][1])
+    #     self.video_list_view.add_widget(self.video_list_layout)
+    #
+    #     if self.current_state == self.cat[0][0]:
+    #         self.video_container_layout.remove_widget(self.user_layout)
+    #         self.video_container_layout.add_widget(self.video_filter_layout)
+    #         self.video_container_layout.add_widget(self.video_list_view)
+    #
+    #     self.current_state = self.cat[3][0]
+    #     self.link = os.path.abspath(self.cat[3][1])
 
     def btn_login_on_press(self, instance):
         self.log_state = 1
@@ -235,6 +235,7 @@ class MainLayout(GridLayout):
             self.video_container_layout.remove_widget(self.user_layout)
             self.user_layout = self.account_layout()
             self.video_container_layout.add_widget(self.user_layout)
+            self.nav_btn_sms.set_disabled(False)
 
     def register_btn_press(self, instance):
         e = self.email_input.text
@@ -254,6 +255,7 @@ class MainLayout(GridLayout):
             self.video_container_layout.remove_widget(self.user_layout)
             self.user_layout = self.account_layout()
             self.video_container_layout.add_widget(self.user_layout)
+            self.nav_btn_sms.set_disabled(False)
 
     def logout_press(self, instance):
         self.log = False
@@ -343,7 +345,7 @@ class MainLayout(GridLayout):
             bot_layout.cols = 1
             bot_layout.pos_hint = {'center_x': 0.5, 'center_y': 0.5}
             top_layout.add_widget(Label(text="Account", font_size=32, color=self.title_color, font_name=self.title_font))
-            btn_logout = Button(text='Submit', size_hint=(0.5, None), height=50, font_size=28)
+            btn_logout = Button(text='Logout', size_hint=(0.5, None), height=50, font_size=28)
             btn_logout.bind(on_press=self.logout_press)
             bot_layout.add_widget(btn_logout)
 

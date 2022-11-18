@@ -1,5 +1,6 @@
-import os
-import time
+import requests
 
-print('Absolute path of file:     ',
-      os.path.abspath('video/20221024_185639.mp4'))
+r = requests.get('https://firebasestorage.googleapis.com/v0/b/upload-video-536b1.appspot.com/o/?alt=media')
+
+with open('f.json', 'wb') as f:
+    f.write(r.content)
